@@ -9,7 +9,7 @@ public class Planet {
 
 	static final double G = 6.67e-11;
 
-	public Planet (double xP, double yP, double xV,
+	public Planet(double xP, double yP, double xV,
 		double yV, double m, String img){
 		
 		xxPos = xP;
@@ -77,4 +77,24 @@ public class Planet {
 		return sum;
 	}
 
+	public void update(double time, double xForce, double yForce){
+		double xxAccel = xForce / this.mass;
+		double yyAccel = yForce / this.mass;
+
+		this.xxVel = this.xxVel + time * xxAccel;
+		this.yyVel = this.yyVel + time * yyAccel;
+
+		this.xxPos = this.xxPos + xxVel * time;
+		this.yyPos = this.yyPos + yyVel * time; 
+	}
+
+	public void draw(){
+		StdDraw.picture(this.xxPos,this.yyPos,"images/"+this.imgFileName);
+	}
+
 }
+
+
+
+
+
