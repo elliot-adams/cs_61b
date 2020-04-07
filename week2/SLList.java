@@ -1,4 +1,4 @@
-//Contains everything up until implementing null scenario and sentinel etc.
+//Contains everything up until caching size, implementing null scenario, and sentinel etc.
 public class SLList{
 
 	//Nesting IntNode class since it's basically a subordinate class
