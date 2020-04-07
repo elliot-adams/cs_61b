@@ -93,6 +93,10 @@ public class IntList {
         return A;
         */
         //recursive method - did totally independently
+        //Added null case scenario; couldn't implement recursively
+        if (A == null){
+            return B;
+        }
         if (A.rest == null){
             A.rest = B;
             return null;
@@ -107,6 +111,11 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //recursive method did totally independently
+        //Added null case scenario; couldn't implement recursively
+        if (A == null){
+            return B;
+        }
+
         if (A.rest == null){
             return new IntList(A.first,B);
         }
