@@ -43,6 +43,8 @@ public class ArrayDequeTest {
         A.printDeque();
         A.addFirst(3);
         A.printDeque();
+        A.addFirst(1);
+        A.printDeque();
         System.out.println();
 
         //removeFirst
@@ -103,6 +105,7 @@ public class ArrayDequeTest {
         System.out.println();
          */
 
+
         /*
         //scenario where we call removeLast before ever having added last so have to jump to other end,
         //and then addLast so have to jump back to opposite end
@@ -149,14 +152,27 @@ public class ArrayDequeTest {
         System.out.println();
          */
 
-
+        /*
         ArrayDeque<Integer> D = new ArrayDeque<>();
         D.addLast(0);
         System.out.println(D.get(0));
         D.addLast(2);
         System.out.println(D.get(1));
+         */
 
+        ArrayDeque<Integer> E = new ArrayDeque<>();
+        for (int i = 1; i <= 50; i++){
+            E.addFirst(i);
+            E.addLast(100);
+        }
+        E.printDeque();
 
+        for (int i = 1; i <=40; i++){
+            E.removeFirst();
+            E.removeLast();
+        }
+        E.printDeque();
+        System.out.println(E.size());
 
     }
 }

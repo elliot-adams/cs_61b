@@ -120,20 +120,27 @@ public class ArrayDeque<T> {
         if (isEmpty()){
             return null;
         }
-        //if nextLast at index 0 ie last item is at index size - 1
-        if (nextLast == 0){
-            T removed = items[items.length - 1];
-            items[items.length - 1] = null;
-            nextLast = items.length - 1;
-            size --;
-            return removed;
-        }
+
         else{
-            T removed = items[nextLast - 1];
-            items[nextLast - 1] = null;
-            nextLast --;
-            size --;
-            return removed;
+            if(usage_ratio() < 0.3){
+                cull(size*2);
+            }
+
+        //if nextLast at index 0 ie last item is at index size - 1
+            if (nextLast == 0){
+                T removed = items[items.length - 1];
+                items[items.length - 1] = null;
+                nextLast = items.length - 1;
+                size --;
+                return removed;
+            }
+            else{
+                T removed = items[nextLast - 1];
+                items[nextLast - 1] = null;
+                nextLast --;
+                size --;
+                return removed;
+            }
         }
     }
 
@@ -141,12 +148,32 @@ public class ArrayDeque<T> {
     private void resize(int capacity){
         //Note this method does not adjust the size variable itself
         T[] new_items = (T[]) new Object[capacity];
-        System.arraycopy(items,0,new_items,0,size);
+
+        int external_index = 0;
+        while (external_index < size) {
+            new_items[external_index] = get(external_index);
+            external_index++;
+        }
+        nextFirst = capacity - 1; //last slot
+        nextLast = size;
         items = new_items;
     }
 
-    private int usage_ratio(){
+    private double usage_ratio(){
         return size / items.length;
+    }
+
+    private void cull(int capacity){
+        T[] new_items = (T[]) new Object[capacity];
+
+        int external_index = 0;
+        while (external_index < size) {
+            new_items[external_index] = get(external_index);
+            external_index++;
+        }
+        nextFirst = capacity - 1; //last slot
+        nextLast = size;
+        items = new_items;
     }
 
 }
