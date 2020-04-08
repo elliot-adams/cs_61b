@@ -89,8 +89,7 @@ public class LinkedListDeque<T> {
                 ptr = ptr.next;
             }
         }
-        System.out.print("(" + size +")"); //just for reference when checking
-        System.out.println(""); //to differentiate from whatever will be printed next
+        System.out.println("(size: " + size +")"); //just for reference when checking
     }
 
     // Removes and returns the item at the front of the deque. If no such item exists, returns null.
