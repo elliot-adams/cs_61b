@@ -98,8 +98,7 @@ public class ArrayDeque<T> {
             return null;
         }
         else {
-            if(usage_ratio() < 0.3){
-                //System.out.println(usage_ratio());
+            if(usage_ratio() < 0.3 && size > 8){
                 cull(size);
             }
 
@@ -128,7 +127,7 @@ public class ArrayDeque<T> {
         }
 
         else{
-            if(usage_ratio() < 0.3){
+            if(usage_ratio() < 0.3 && size > 8){
                 cull(size);
             }
 
