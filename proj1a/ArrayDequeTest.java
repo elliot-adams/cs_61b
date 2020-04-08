@@ -103,6 +103,7 @@ public class ArrayDequeTest {
         System.out.println();
          */
 
+        /*
         //scenario where we call removeLast before ever having added last so have to jump to other end,
         //and then addLast so have to jump back to opposite end
         ArrayDeque<Integer> B = new ArrayDeque<>();
@@ -123,26 +124,39 @@ public class ArrayDequeTest {
         B.removeLast();
         B.printDeque();
         System.out.println();
+         */
 
+        /*
         //scenario where we call removeFirst before ever having added first so have to jump to other end,
         //and then addFirst so have to jump back to opposite end
         ArrayDeque<Integer> C = new ArrayDeque<>();
         C.addLast(34);
         C.printDeque();
         System.out.println(C.removeFirst());
-        B.printDeque();
-        B.addFirst(34);
-        B.printDeque();
-        B.addFirst(17);
-        B.printDeque();
-        B.addLast(12);
-        B.printDeque();
-        B.removeLast();
-        B.printDeque();
-        B.removeFirst();
-        B.printDeque();
-        B.removeFirst();
-        B.printDeque();
+        C.printDeque();
+        C.addFirst(34);
+        C.printDeque();
+        C.addFirst(17);
+        C.printDeque();
+        C.addLast(12);
+        C.printDeque();
+        C.removeLast();
+        C.printDeque();
+        C.removeFirst();
+        C.printDeque();
+        C.removeFirst();
+        C.printDeque();
+        System.out.println();
+         */
+
+
+        ArrayDeque<Integer> D = new ArrayDeque<>();
+        D.addLast(0);
+        System.out.println(D.get(0));
+        D.addLast(2);
+        System.out.println(D.get(1));
+
+
 
     }
 }

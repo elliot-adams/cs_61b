@@ -1,6 +1,6 @@
 public class LinkedListDeque<T> {
 
-    public class Node{
+    private class Node{
 
         public T item;
         public Node next;
@@ -31,12 +31,13 @@ public class LinkedListDeque<T> {
         size = 0;
     }
 
-    public LinkedListDeque(T x){
+    /*public LinkedListDeque(T x){
         sentinel = new Node(null,null,null);
         sentinel.next = new Node(x, sentinel, sentinel);
         sentinel.prev = sentinel.next;
         size = 1;
     }
+     */
 
 
 
@@ -95,7 +96,7 @@ public class LinkedListDeque<T> {
     // Removes and returns the item at the front of the deque. If no such item exists, returns null.
     // Must not involve looping or recursion and must take constant time (ie not size dependent
     public T removeFirst(){
-        if (sentinel.next == null && sentinel.prev == null){
+        if (isEmpty()){
             return null;
         }
         Node removed = new Node(sentinel.next.item,null,null);
@@ -108,7 +109,7 @@ public class LinkedListDeque<T> {
     // Removes and returns the item at the back of the deque. If no such item exists, returns null.
     // Must not involve looping or recursion and must take constant time (ie not size dependent
     public T removeLast(){
-        if (sentinel.next == null && sentinel.prev == null){
+        if (isEmpty()){
             return null;
         }
         Node removed = new Node(sentinel.prev.item,null,null);
@@ -143,6 +144,7 @@ public class LinkedListDeque<T> {
         }
     }
 
+    /*
     public static void main(String[] args) {
         LinkedListDeque<Integer> N = new LinkedListDeque<>();
         System.out.println(N.isEmpty());
@@ -222,7 +224,9 @@ public class LinkedListDeque<T> {
         System.out.println(M.getRecursive(8));
 
 
+
     }
+     */
 
 
 }
