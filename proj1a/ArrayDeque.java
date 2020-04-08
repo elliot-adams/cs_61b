@@ -97,20 +97,26 @@ public class ArrayDeque<T> {
         if (isEmpty()){
             return null;
         }
-        //if nextFirst at last spot on right ie first item is at index 0
-        if (nextFirst + 1 > items.length - 1){
-            T removed = items[0];
-            items[0] = null;
-            nextFirst = 0;
-            size --;
-            return removed;
-        }
-        else{
-            T removed = items[nextFirst + 1];
-            items[nextFirst + 1] = null;
-            nextFirst ++;
-            size --;
-            return removed;
+        else {
+            if(usage_ratio() < 0.3){
+                //System.out.println(usage_ratio());
+                cull(size);
+            }
+
+            //if nextFirst at last spot on right ie first item is at index 0
+            if (nextFirst + 1 > items.length - 1) {
+                T removed = items[0];
+                items[0] = null;
+                nextFirst = 0;
+                size--;
+                return removed;
+            } else {
+                T removed = items[nextFirst + 1];
+                items[nextFirst + 1] = null;
+                nextFirst++;
+                size--;
+                return removed;
+            }
         }
     }
 
@@ -122,7 +128,7 @@ public class ArrayDeque<T> {
         }
 
         else{
-            if(usage_ratio() < 0.35){
+            if(usage_ratio() < 0.3){
                 cull(size);
             }
 
@@ -160,7 +166,10 @@ public class ArrayDeque<T> {
     }
 
     private double usage_ratio(){
-        return size / items.length;
+        double used = size;
+        double capacity = items.length;
+        double usage = used / capacity;
+        return usage;
     }
 
     private void cull(int capacity){

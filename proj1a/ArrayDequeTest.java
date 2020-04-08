@@ -160,20 +160,32 @@ public class ArrayDequeTest {
         System.out.println(D.get(1));
          */
 
+
         ArrayDeque<Integer> E = new ArrayDeque<>();
-        for (int i = 1; i <= 50; i++){
+        for (int i = 1; i <= 64; i++){
             E.addFirst(i);
-            E.addLast(100);
         }
         E.printDeque();
 
-        for (int i = 1; i <=40; i++){
+        for (int i = 1; i <=64; i++){
             E.removeFirst();
-            E.removeLast();
         }
         E.printDeque();
         System.out.println(E.size());
 
+
+        /*
+        ArrayDeque<Integer> F = new ArrayDeque<>();
+        for (int i = 1; i <= 8; i++){
+            F.addLast(i);
+        }
+        F.printDeque();
+
+        for (int i = 1; i <= 8; i++){
+            F.addLast(i + 8);
+        }
+        F.printDeque();
+         */
 
     }
 }
