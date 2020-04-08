@@ -1,9 +1,3 @@
-/*
-To do:
-Resizing method
-Usage ratio implementation
- */
-
 public class ArrayDeque<T> {
 
     private T[] items;
@@ -19,8 +13,7 @@ public class ArrayDeque<T> {
         nextLast = 0;
     }
 
-    //must take constant time unless resizing (no need to manage usage ratio here; usage going up and will necessarily be above 25% post-resize if resizing)
-    //not resizeable
+    //Takes constant time unless resizing (no need to manage usage ratio here; usage going up and will necessarily be above 30% post-resize if resizing)
     public void addFirst(T x){
         if (size == items.length){
             resize(size * 2);
@@ -36,8 +29,7 @@ public class ArrayDeque<T> {
         }
     }
 
-    //must take constant time unless resizing
-    //not resizeable
+    //must takes constant time unless resizing
     public void addLast(T x){
         if (size == items.length){
             resize(size * 2);
@@ -54,7 +46,6 @@ public class ArrayDeque<T> {
     }
 
     public boolean isEmpty(){
-        //if you didn't want to trust size you could loop through starting at 0 and check if any items != null
         return size == 0;
     }
 
@@ -79,9 +70,9 @@ public class ArrayDeque<T> {
             if (i >= size || isEmpty()) {
                 return null;
             }
-            //accounting for circularity in constant time (not looping like printDeque)
             else{
                 int first = nextFirst + 1;
+                //accounting for circularity in constant time; checks if we need to loop back around to left side
                 if (i + first > items.length - 1){
                     return items[i + first - items.length];
                 }
@@ -91,27 +82,26 @@ public class ArrayDeque<T> {
             }
     }
 
-    //must take constant time unless resizing
-    //should avoid loitering and manage usage ratio
+    //Takes constant time unless resizing
     public T removeFirst(){
         if (isEmpty()){
             return null;
         }
         else {
-            if(usage_ratio() < 0.3 && size > 8){
-                cull(size);
+            if(usage_ratio() < 0.3 && size > 8){ //could resize below 8 but would have to alter constructor; probably just change nextFirst to items.length - 1
+                resize(size); //no thorough logic behind using size rather than size * 2 here, just figure list will keep trending down so more efficient to cut more early
             }
 
             //if nextFirst at last spot on right ie first item is at index 0
             if (nextFirst + 1 > items.length - 1) {
                 T removed = items[0];
-                items[0] = null;
+                items[0] = null; //avoids loitering
                 nextFirst = 0;
                 size--;
                 return removed;
             } else {
                 T removed = items[nextFirst + 1];
-                items[nextFirst + 1] = null;
+                items[nextFirst + 1] = null; //avoids loitering
                 nextFirst++;
                 size--;
                 return removed;
@@ -119,8 +109,7 @@ public class ArrayDeque<T> {
         }
     }
 
-    //must take constant time unless resizing
-    //should avoid loitering and manage usage ratio
+    //Takes constant time unless resizing
     public T removeLast(){
         if (isEmpty()){
             return null;
@@ -128,7 +117,7 @@ public class ArrayDeque<T> {
 
         else{
             if(usage_ratio() < 0.3 && size > 8){
-                cull(size);
+                resize(size);
             }
 
         //if nextLast at index 0 ie last item is at index size - 1
@@ -151,9 +140,7 @@ public class ArrayDeque<T> {
 
     /** Resizes the underlying array to the target capacity */
     private void resize(int capacity){
-        //Note this method does not adjust the size variable itself
         T[] new_items = (T[]) new Object[capacity];
-
         int external_index = 0;
         while (external_index < size) {
             new_items[external_index] = get(external_index);
@@ -171,6 +158,7 @@ public class ArrayDeque<T> {
         return usage;
     }
 
+    /*
     private void cull(int capacity){
         T[] new_items = (T[]) new Object[capacity];
 
@@ -183,5 +171,5 @@ public class ArrayDeque<T> {
         nextLast = size;
         items = new_items;
     }
-
+    */
 }
