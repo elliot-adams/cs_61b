@@ -157,19 +157,4 @@ public class ArrayDeque<T> {
         double usage = used / capacity;
         return usage;
     }
-
-    /*
-    private void cull(int capacity){
-        T[] new_items = (T[]) new Object[capacity];
-
-        int external_index = 0;
-        while (external_index < size) {
-            new_items[external_index] = get(external_index);
-            external_index++;
-        }
-        nextFirst = capacity - 1; //last slot
-        nextLast = size;
-        items = new_items;
-    }
-    */
 }
