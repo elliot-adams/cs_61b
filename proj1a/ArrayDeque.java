@@ -122,8 +122,8 @@ public class ArrayDeque<T> {
         }
 
         else{
-            if(usage_ratio() < 0.3){
-                cull(size*2);
+            if(usage_ratio() < 0.35){
+                cull(size);
             }
 
         //if nextLast at index 0 ie last item is at index size - 1

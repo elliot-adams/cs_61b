@@ -174,5 +174,6 @@ public class ArrayDequeTest {
         E.printDeque();
         System.out.println(E.size());
 
+
     }
 }
