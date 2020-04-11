@@ -66,6 +66,22 @@ public class IntListTest {
         assertEquals(IntList.of(1, 2, 3), A);
     }
 
+    @Test //can declare (timeout = 1000) here to prevent infinite loops and timeout your test (in milliseconds)
+    public void testReverse(){
+        //added this per Lab 3 instructions just to test that reverse is destructive (not really necessary)
+        IntList destructive = IntList.of(17,34);
+        IntList Empty = IntList.of();
+        IntList A = IntList.of(0,1,2,3);
+
+        IntList Empty_exp = IntList.of();
+        IntList A_exp = IntList.of(3,2,1,0);
+
+        assertNotEquals(IntList.reverse(destructive),destructive);
+        assertEquals(Empty_exp,IntList.reverse(Empty));
+        assertEquals(A_exp,IntList.reverse(A));
+
+    }
+
     /** If you're running this from the command line, you'll need
       * to add a main method. See ArithmeticTest.java for an
       * example. */
