@@ -1,21 +1,21 @@
-//same as project 1a, just changed T to Item
+//same as project 1a, just changed T to Item and corrected style
 public class LinkedListDeque<Item> implements Deque<Item> {
 
-    private class Node{
+    private class Node {
 
-        public Item item;
-        public Node next;
-        public Node prev;
+        private Item item;
+        private Node next;
+        private Node prev;
 
-        public Node(Item t, Node n, Node p){
+        Node(Item t, Node n, Node p) { //public modifier redundant here according to style checker
             item = t;
             next = n;
             prev = p;
         }
 
         //called by getRecursive in LinkedListDeque class
-        private Item getRecursive(int index){
-            if (index == 0){
+        private Item getRecursive(int index) {
+            if (index == 0) {
                 return item;
             }
             return this.next.getRecursive(index - 1);
@@ -27,8 +27,8 @@ public class LinkedListDeque<Item> implements Deque<Item> {
     private int size;
 
     //for empty list scenario
-    public LinkedListDeque(){
-        sentinel = new Node(null,null,null);
+    public LinkedListDeque() {
+        sentinel = new Node(null, null, null);
         size = 0;
     }
 
@@ -41,15 +41,13 @@ public class LinkedListDeque<Item> implements Deque<Item> {
      */
 
 
-
     @Override
-    public void addFirst(Item x){
+    public void addFirst(Item x) {
         //if list was previously empty
-        if (sentinel.next == null && sentinel.prev == null){
+        if (sentinel.next == null && sentinel.prev == null) {
             sentinel.next = new Node(x, sentinel, sentinel);
             sentinel.prev = sentinel.next;
-        }
-        else {
+        } else {
             sentinel.next = new Node(x, sentinel.next, sentinel);
             sentinel.next.next.prev = sentinel.next;
         }
@@ -57,13 +55,12 @@ public class LinkedListDeque<Item> implements Deque<Item> {
     }
 
     @Override
-    public void addLast(Item x){
+    public void addLast(Item x) {
         //if list was previously empty
-        if (sentinel.next == null && sentinel.prev == null){
+        if (sentinel.next == null && sentinel.prev == null) {
             sentinel.next = new Node(x, sentinel, sentinel);
             sentinel.prev = sentinel.next;
-        }
-        else {
+        } else {
             sentinel.prev = new Node(x, sentinel, sentinel.prev);
             sentinel.prev.prev.next = sentinel.prev;
         }
@@ -71,81 +68,81 @@ public class LinkedListDeque<Item> implements Deque<Item> {
     }
 
     @Override
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         //could've just returned size == 0
         return (sentinel.next == null || sentinel.next == sentinel) && (sentinel.prev == null || sentinel.prev == sentinel);
     }
 
     @Override
     // Must take constant time so cached size
-    public int size(){
+    public int size() {
         return size;
     }
 
     @Override
     //Prints the items in the deque from first to last, separated by a space
-    public void printDeque(){
-        if (size == 0){
+    public void printDeque() {
+        if (size == 0) {
             System.out.print("Empty deque ");
-        }
-        else {
+        } else {
             Node ptr = this.sentinel.next;
             for (int i = 0; i < this.size(); i++) {
                 System.out.print(ptr.item + " ");
                 ptr = ptr.next;
             }
         }
-        System.out.println("(size: " + size +")"); //just for reference when checking
+        System.out.println("(size: " + size + ")"); //just for reference when checking
     }
 
     @Override
     // Removes and returns the item at the front of the deque. If no such item exists, returns null.
     // Must not involve looping or recursion and must take constant time (ie not size dependent
-    public Item removeFirst(){
-        if (isEmpty()){
+    public Item removeFirst() {
+        if (isEmpty()) {
             return null;
         }
-        Node removed = new Node(sentinel.next.item,null,null);
+        Node removed = new Node(sentinel.next.item, null, null);
         sentinel.next = sentinel.next.next;
         sentinel.next.prev = sentinel;
-        size --;
+        size--;
         return removed.item;
     }
 
     @Override
     // Removes and returns the item at the back of the deque. If no such item exists, returns null.
     // Must not involve looping or recursion and must take constant time (ie not size dependent
-    public Item removeLast(){
-        if (isEmpty()){
+    public Item removeLast() {
+        if (isEmpty()) {
             return null;
         }
-        Node removed = new Node(sentinel.prev.item,null,null);
+        Node removed = new Node(sentinel.prev.item, null, null);
         sentinel.prev = sentinel.prev.prev;
         sentinel.prev.next = sentinel;
-        size --;
+        size--;
         return removed.item;
     }
 
     /* Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
-    If no such item exists, returns null. Must not alter the deque and must use iteration, not recursion */
+    If no such item exists, returns null.
+    Must not alter the deque and must use iteration, not recursion */
+
     @Override
-    public Item get(int index){
-        if (index > size -1 || index < 0) {
+    public Item get(int index) {
+        if (index > size - 1 || index < 0) {
             return null;
         }
         Node ptr = this.sentinel.next;
-        for (int i = 0; i < index; i++){
+        for (int i = 0; i < index; i++) {
             ptr = ptr.next;
         }
         return ptr.item;
     }
 
     //Same as get above but recursive
-    public Item getRecursive(int index){
-        if (index > size -1 || index < 0) {
+    public Item getRecursive(int index) {
+        if (index > size - 1 || index < 0) {
             return null;
-        }
-        else {
+        } else {
             Node ptr = this.sentinel.next;
             return ptr.getRecursive(index); //calling helper
         }
