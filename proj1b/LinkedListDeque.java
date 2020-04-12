@@ -70,7 +70,8 @@ public class LinkedListDeque<Item> implements Deque<Item> {
     @Override
     public boolean isEmpty() {
         //could've just returned size == 0
-        return (sentinel.next == null || sentinel.next == sentinel) && (sentinel.prev == null || sentinel.prev == sentinel);
+        return (sentinel.next == null || sentinel.next == sentinel)
+                && (sentinel.prev == null || sentinel.prev == sentinel);
     }
 
     @Override
