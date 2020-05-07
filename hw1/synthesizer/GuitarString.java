@@ -26,12 +26,12 @@ public class GuitarString {
 
     /* Pluck the guitar string by replacing the buffer with white noise. */
     public void pluck() {
-        double rand_double = 0;
+        double randDouble = 0;
         for (int i = 0; i < buffer.capacity(); i++) {
-                    buffer.dequeue();
-                    rand_double = Math.random() - 0.5;
-                    buffer.enqueue(rand_double);
-                }
+            buffer.dequeue();
+            randDouble = Math.random() - 0.5;
+            buffer.enqueue(randDouble);
+        }
         // Dequeue everything in the buffer, and replace it with random numbers
         //       between -0.5 and 0.5. You can get such a number by using:
         //       double r = Math.random() - 0.5;
@@ -44,8 +44,8 @@ public class GuitarString {
     public void tic() {
         double front = buffer.dequeue();
         double next = buffer.peek();
-        double new_sample = ((front + next) / 2.0) * DECAY;
-        buffer.enqueue(new_sample);
+        double newSample = ((front + next) / 2.0) * DECAY;
+        buffer.enqueue(newSample);
         // Dequeue the front sample and enqueue a new sample that is
         //       the average of the two multiplied by the DECAY factor.
         //       Do not call StdAudio.play().
