@@ -14,6 +14,7 @@ public class RandomWorldDemo {
     private static final int HEIGHT = 50;
 
     private static final long SEED = 2873123;
+    //pseudo random number generator - gives you identical sequence of numbers for same seed every time
     private static final Random RANDOM = new Random(SEED);
 
     /**
