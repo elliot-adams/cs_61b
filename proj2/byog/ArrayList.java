@@ -1,3 +1,7 @@
+//doesn't resize very efficiently (doesn't retain any null spots and just increments size by 1 each time you add 1)
+//no issues with usage ratio though, maintains size at exactly the number of objects
+//note that it keeps resize method private
+
 package byog;
 
 public class ArrayList<Item> {

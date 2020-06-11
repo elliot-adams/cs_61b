@@ -1,22 +1,31 @@
+//useful comparison methods for comparing positions
+//Don't actually need serialization here (commented out), but brief summary below (don't fully understand)
+/*
+Serialization is the process of saving an object's state to a sequence of bytes,
+which then can be stored on a file or sent over the network, and deserialization
+is the process of reconstructing an object from those bytes.
+For more detail: https://dzone.com/articles/what-is-serialization-everything-about-java-serial#:~:text=Only%20Classes%20That%20Implement%20Serializable%20Can%20Be%20Serialized&text=Java's%20default%20serialization%20process%20is,except%20static%20and%20transient%20fields).
+http://prinavtech.blogspot.com/2017/04/java-serialization-and-deserialization.html
+ */
 package byog;
 
-import java.io.Serializable;
+//import java.io.Serializable;
 
-public class Posit implements Serializable {
+public class Posit /*implements Serializable*/ {
     private int xPos;
     private int yPos;
 
     public Posit(int xP, int yP) {
-        this.xPos = xP;
-        this.yPos = yP;
+        xPos = xP;
+        yPos = yP;
     }
 
     public int xPos() {
-        return this.xPos;
+        return xPos;
     }
 
     public int yPos() {
-        return this.yPos;
+        return yPos;
     }
 
     public static Posit smallerX(Posit p1, Posit p2) {

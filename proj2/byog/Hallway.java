@@ -4,51 +4,58 @@ import byog.TileEngine.TETile;
 import byog.TileEngine.Tileset;
 
 public class Hallway {
-    Posit corner;
+    Posit corner; //for L shaped halls
     Posit start;
     Posit end;
     int key;
 
     public Hallway(Posit c, Posit s, Posit e, int k) {
-        this.corner = c;
-        this.start = s;
-        this.end = e;
-        this.key = k;
+        corner = c;
+        start = s;
+        end = e;
+        key = k;
     }
 
     public static Posit addVerticalHallway(TETile[][] world, Posit p, int h) {
+        //draws from bottom to top, returns position of the top end of the hall
         for (int y = 0; y < h; y += 1) {
-            world[p.xPos() - 1][p.yPos() + y] = Tileset.WALL;
-            world[p.xPos() + 1][p.yPos() + y] = Tileset.WALL;
+            world[p.xPos() - 1][p.yPos() + y] = Tileset.WALL; //left wall
+            world[p.xPos() + 1][p.yPos() + y] = Tileset.WALL; //right wall
         }
         return new Posit(p.xPos(), p.yPos() + h);
     }
 
     public static Posit addHorizontalHallway(TETile[][] world, Posit p, int w) {
+        //draws from left to right, returns position of the right end of the hall
         for (int x = 0; x < w; x += 1) {
             //System.out.println("world: "+world.length+" w: "+w+" p.x: "+p.xPos+" p.y: "+p.yPos);
-            world[p.xPos() + x][p.yPos() - 1] = Tileset.WALL;
-            world[p.xPos() + x][p.yPos() + 1] = Tileset.WALL;
+            world[p.xPos() + x][p.yPos() - 1] = Tileset.WALL; //bottom wall
+            world[p.xPos() + x][p.yPos() + 1] = Tileset.WALL; //top wall
         }
         return new Posit(p.xPos() + w, p.yPos());
     }
 
     private static void fillVerticalHallway(TETile[][] world, Posit p, int h) {
+        //draws hall floor from bottom to top (note private)
         for (int y = 0; y < h; y += 1) {
-            world[p.xPos()    ][p.yPos() + y] = Tileset.FLOOR;
+            world[p.xPos()][p.yPos() + y] = Tileset.FLOOR;
         }
     }
 
     private static void fillHorizontalHallway(TETile[][] world, Posit p, int w) {
+        //draws hall floor from bottom to top (note private)
         for (int x = 0; x < w; x += 1) {
-            world[p.xPos() + x][p.yPos()    ] = Tileset.FLOOR;
+            world[p.xPos() + x][p.yPos()] = Tileset.FLOOR;
         }
     }
 
     private static void fillLHallway(TETile[][] world, Hallway hw) {
         switch (hw.key) {
             case 0: {
+                //horizontal then vertical hall (from L to R)
+                //fill horizontal portion
                 fillHorizontalHallway(world, hw.start, hw.corner.xPos() - hw.start.xPos() + 1);
+                //fill vertical portion, start at bottom whether that's the corner or the end, (could be going up or down)
                 fillVerticalHallway(world, Posit.smallerY(hw.corner, hw.end),
                         Math.abs(hw.corner.yPos() - hw.end.yPos()) + 1);
                 break;
