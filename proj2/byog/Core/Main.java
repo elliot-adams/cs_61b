@@ -13,6 +13,7 @@ public class Main {
             System.out.println("Can only have one argument - the input string");
             System.exit(0);
         } else if (args.length == 1) {
+            //play through terminal (input seed in terminal)
             Game game = new Game();
             TERenderer ter = new TERenderer();
             TETile[][] world = game.playWithInputString(args[0]);

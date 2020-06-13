@@ -21,14 +21,13 @@ public class WorldGenerator {
 
     public static ArrayList<Room> drawRoom(TETile[][] tiles,
                                            int roomNumber, WorldGenerateParam wgp) {
-        Random rand = new Random(wgp.seed() + 10);
-        //get new random seed (?)
+        Random rand = new Random(wgp.seed() + 10); //object with new pseudo random sequence
         int maxW = 4;
         int maxH = 5;
 
         ArrayList<Room> roomList = new ArrayList<>();
         for (int i = 0; i < roomNumber; i += 1) {
-            int roomWidth = rand.nextInt(maxW) + 3; //random size with constraints (could just add 3 to maxW and maxH?)
+            int roomWidth = rand.nextInt(maxW) + 3; //random size within bounds (could just add 3 to maxW and maxH?)
             int roomHeight = rand.nextInt(maxH) + 3;
             int roomPx = rand.nextInt(WIDTH - roomWidth); //random position that can't be out of bounds
             int roomPy = rand.nextInt(HEIGHT - roomHeight);
@@ -41,7 +40,7 @@ public class WorldGenerator {
     }
 
     public static Hallway drawLWay(TETile[][] tiles, Room r1, Room r2, WorldGenerateParam wgp) {
-        Random rand = new Random(wgp.seed() + 100);
+        Random rand = new Random(wgp.seed() + 100); //object with new pseudo random sequence
 
         Posit p1 = Room.innerRand(r1, wgp);
         Posit p2 = Room.innerRand(r2, wgp);
@@ -75,7 +74,7 @@ public class WorldGenerator {
 
     public static Posit fillPlayer(TETile[][] world,
                                    ArrayList<Room> roomList, WorldGenerateParam wgp) {
-        Random rand = new Random(wgp.seed() + 1234);
+        Random rand = new Random(wgp.seed() + 1234); //object with new pseudo random sequence
         Posit p = Room.innerRand(roomList.get(roomList.size()
                 - rand.nextInt(roomList.size() - 1) - 1), wgp);
         if (p.xPos() == LockDoor.chooseLockedDoor(roomList, wgp).xPos()) {
