@@ -22,19 +22,20 @@ public class WorldGenerator {
     public static ArrayList<Room> drawRoom(TETile[][] tiles,
                                            int roomNumber, WorldGenerateParam wgp) {
         Random rand = new Random(wgp.seed() + 10);
+        //get new random seed (?)
         int maxW = 4;
         int maxH = 5;
 
         ArrayList<Room> roomList = new ArrayList<>();
         for (int i = 0; i < roomNumber; i += 1) {
-            int roomWidth = rand.nextInt(maxW) + 3;
+            int roomWidth = rand.nextInt(maxW) + 3; //random size with constraints (could just add 3 to maxW and maxH?)
             int roomHeight = rand.nextInt(maxH) + 3;
-            int roomPx = rand.nextInt(WIDTH - roomWidth);
+            int roomPx = rand.nextInt(WIDTH - roomWidth); //random position that can't be out of bounds
             int roomPy = rand.nextInt(HEIGHT - roomHeight);
             Posit startP = new Posit(roomPx, roomPy);
-            Room.addRoom(tiles, startP, roomWidth, roomHeight);
-            Room newRoom = new Room(startP, roomWidth, roomHeight);
-            roomList.addLast(newRoom);
+            Room.addRoom(tiles, startP, roomWidth, roomHeight); //actually adds tiles to matrix
+            Room newRoom = new Room(startP, roomWidth, roomHeight); //creates object so we can store it's details (independently of matrix)
+            roomList.addLast(newRoom); //this way can keep track of all rooms / locations in an array list
         }
         return roomList;
     }

@@ -6,9 +6,9 @@ public class WorldGenerateParam {
     private long seed;
 
     public WorldGenerateParam() {
-        this.width = 80;
-        this.height = 30;
-        this.seed = 587667;
+        width = 80;
+        height = 30;
+        seed = 587667;
     }
 
     public WorldGenerateParam(int w, int h, long seed) {
@@ -18,17 +18,20 @@ public class WorldGenerateParam {
     }
 
     public int width() {
-        return this.width;
+        return width;
     }
 
     public int height() {
-        return this.height;
+        return height;
     }
 
     public long seed() {
-        return this.seed;
+        return seed;
     }
     public WorldGenerateParam setWorldGenerateParam(int w, int h, long s) {
+        //return new wgp with width, height, seed specified
+        //not static so need to call on an existing wgp, but don't need to construct a new one
+        //so basically just saves you writing out statement to create a new wgp
         WorldGenerateParam wgp = new WorldGenerateParam();
         wgp.width = w;
         wgp.height = h;
