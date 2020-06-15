@@ -7,7 +7,7 @@ public class Hallway {
     Posit corner; //for L shaped halls
     Posit start;
     Posit end;
-    int key;
+    int key; //for L shaped halls, 0 (horizontal then vert hall, right room to left room) or 1 (vert then horizontal hall, draw from bottom room to top room)
 
     public Hallway(Posit c, Posit s, Posit e, int k) {
         corner = c;

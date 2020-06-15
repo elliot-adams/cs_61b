@@ -19,7 +19,7 @@ public class LockDoor {
     public static Posit chooseLockedDoor(ArrayList<Room> roomList, WorldGenerateParam wgp) {
         Random rand = new Random(wgp.seed());
         Posit door;
-        if (!filterRoomList(roomList).isEmpty()) { //check if there rooms with y coordinate <=3
+        if (!filterRoomList(roomList).isEmpty()) { //check if there are rooms with y coordinate <=3
             //filter room list for "low" rooms and then choose a random one; then choose random spot within as locked door
             door = setLockedDoor(filterRoomList(roomList).
                     get(rand.nextInt(filterRoomList(roomList).size())), wgp);
